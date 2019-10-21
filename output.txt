@@ -1,0 +1,330 @@
+(base) ~/.../gymexp$ source /home/shitals/anaconda3/bin/activate
+activate does not accept more than one argument:
+['completion-display-width', '1']
+
+(base) ~/.../gymexp$ conda activate base
+(base) ~/.../gymexp$ /home/shitals/anaconda3/bin/python /home/shitals/GitHubSrc/gymexp/cartpole_ppo.py
+2019-10-20 20:27:36,107 INFO resource_spec.py:205 -- Starting Ray with 26.17 GiB memory available for workers and up to 13.11 GiB for objects. You can adjust these settings with ray.init(memory=<bytes>, object_store_memory=<bytes>).
+2019-10-20 20:27:36,439 INFO trainer.py:344 -- Tip: set 'eager': true or the --eager flag to enable TensorFlow eager execution
+2019-10-20 20:27:42,848 INFO rollout_worker.py:768 -- Built policy map: {'default_policy': <ray.rllib.policy.tf_policy_template.PPOTFPolicy object at 0x7f0d7461e2b0>}
+2019-10-20 20:27:42,848 INFO rollout_worker.py:769 -- Built preprocessor map: {'default_policy': <ray.rllib.models.preprocessors.NoPreprocessor object at 0x7f0d7461e048>}
+2019-10-20 20:27:42,849 INFO rollout_worker.py:370 -- Built filter map: {'default_policy': <ray.rllib.utils.filter.NoFilter object at 0x7f0d746089b0>}
+2019-10-20 20:27:42,872 INFO multi_gpu_optimizer.py:93 -- LocalMultiGPUOptimizer devices ['/gpu:0']
+2019-10-20 20:27:50,071 INFO tf_policy.py:358 -- Optimizing variable <tf.Variable 'default_policy/fc_1/kernel:0' shape=(4, 100) dtype=float32>
+2019-10-20 20:27:50,072 INFO tf_policy.py:358 -- Optimizing variable <tf.Variable 'default_policy/fc_1/bias:0' shape=(100,) dtype=float32>
+2019-10-20 20:27:50,072 INFO tf_policy.py:358 -- Optimizing variable <tf.Variable 'default_policy/fc_value_1/kernel:0' shape=(4, 100) dtype=float32>
+2019-10-20 20:27:50,072 INFO tf_policy.py:358 -- Optimizing variable <tf.Variable 'default_policy/fc_value_1/bias:0' shape=(100,) dtype=float32>
+2019-10-20 20:27:50,072 INFO tf_policy.py:358 -- Optimizing variable <tf.Variable 'default_policy/fc_2/kernel:0' shape=(100, 100) dtype=float32>
+2019-10-20 20:27:50,072 INFO tf_policy.py:358 -- Optimizing variable <tf.Variable 'default_policy/fc_2/bias:0' shape=(100,) dtype=float32>
+2019-10-20 20:27:50,072 INFO tf_policy.py:358 -- Optimizing variable <tf.Variable 'default_policy/fc_value_2/kernel:0' shape=(100, 100) dtype=float32>
+2019-10-20 20:27:50,072 INFO tf_policy.py:358 -- Optimizing variable <tf.Variable 'default_policy/fc_value_2/bias:0' shape=(100,) dtype=float32>
+2019-10-20 20:27:50,072 INFO tf_policy.py:358 -- Optimizing variable <tf.Variable 'default_policy/fc_out/kernel:0' shape=(100, 2) dtype=float32>
+2019-10-20 20:27:50,072 INFO tf_policy.py:358 -- Optimizing variable <tf.Variable 'default_policy/fc_out/bias:0' shape=(2,) dtype=float32>
+2019-10-20 20:27:50,072 INFO tf_policy.py:358 -- Optimizing variable <tf.Variable 'default_policy/value_out/kernel:0' shape=(100, 1) dtype=float32>
+2019-10-20 20:27:50,072 INFO tf_policy.py:358 -- Optimizing variable <tf.Variable 'default_policy/value_out/bias:0' shape=(1,) dtype=float32>
+2019-10-20 20:27:50,075 INFO multi_gpu_impl.py:146 -- Training on concatenated sample batches:
+
+{ 'inputs': [ np.ndarray((4000,), dtype=int64, min=0.0, max=1.0, mean=0.479),
+              np.ndarray((4000,), dtype=float32, min=0.0, max=1.0, mean=0.956),
+              np.ndarray((4000, 4), dtype=float32, min=-2.725, max=2.524, mean=0.008),
+              np.ndarray((4000,), dtype=float32, min=-0.694, max=-0.692, mean=-0.693),
+              np.ndarray((4000,), dtype=int64, min=0.0, max=1.0, mean=0.501),
+              np.ndarray((4000,), dtype=float32, min=-1.28, max=4.118, mean=0.0),
+              np.ndarray((4000, 2), dtype=float32, min=-0.005, max=0.005, mean=0.0),
+              np.ndarray((4000, 4), dtype=float32, min=-2.725, max=2.524, mean=0.008),
+              np.ndarray((4000,), dtype=int64, min=0.0, max=1.0, mean=0.479),
+              np.ndarray((4000,), dtype=float32, min=0.0, max=1.0, mean=0.956),
+              np.ndarray((4000,), dtype=float32, min=0.998, max=50.516, mean=12.736),
+              np.ndarray((4000,), dtype=float32, min=-0.005, max=0.005, mean=0.0)],
+  'placeholders': [ <tf.Tensor 'default_policy/action:0' shape=(?,) dtype=int64>,
+                    <tf.Tensor 'default_policy/prev_reward:0' shape=(?,) dtype=float32>,
+                    <tf.Tensor 'default_policy/observation:0' shape=(?, 4) dtype=float32>,
+                    <tf.Tensor 'default_policy/action_logp:0' shape=(?,) dtype=float32>,
+                    <tf.Tensor 'default_policy/actions:0' shape=(?,) dtype=int64>,
+                    <tf.Tensor 'default_policy/advantages:0' shape=(?,) dtype=float32>,
+                    <tf.Tensor 'default_policy/behaviour_logits:0' shape=(?, 2) dtype=float32>,
+                    <tf.Tensor 'default_policy/observation:0' shape=(?, 4) dtype=float32>,
+                    <tf.Tensor 'default_policy/action:0' shape=(?,) dtype=int64>,
+                    <tf.Tensor 'default_policy/prev_reward:0' shape=(?,) dtype=float32>,
+                    <tf.Tensor 'default_policy/value_targets:0' shape=(?,) dtype=float32>,
+                    <tf.Tensor 'default_policy/vf_preds:0' shape=(?,) dtype=float32>],
+  'state_inputs': []}
+
+2019-10-20 20:27:50,075 INFO multi_gpu_impl.py:191 -- Divided 4000 rollout sequences, each of length 1, among 1 devices.
+custom_metrics: {}
+date: 2019-10-20_20-27-54
+done: false
+episode_len_mean: 22.69142857142857
+episode_reward_max: 81.0
+episode_reward_mean: 22.69142857142857
+episode_reward_min: 8.0
+episodes_this_iter: 175
+episodes_total: 175
+experiment_id: c1985b2f9f6348e8a6a2ef0af4682809
+hostname: shitals-ll2x
+info:
+  grad_time_ms: 4118.639
+  learner:
+    default_policy:
+      cur_kl_coeff: 0.20000000298023224
+      cur_lr: 4.999999873689376e-05
+      entropy: 0.664852499961853
+      entropy_coeff: 0.0
+      kl: 0.029014762490987778
+      policy_loss: -0.03758477419614792
+      total_loss: 170.15725708007812
+      vf_explained_var: 0.029591461643576622
+      vf_loss: 170.1890411376953
+  load_time_ms: 134.825
+  num_steps_sampled: 4000
+  num_steps_trained: 3968
+  sample_time_ms: 3711.78
+  update_time_ms: 787.678
+iterations_since_restore: 1
+node_ip: 10.0.0.147
+num_healthy_workers: 1
+off_policy_estimator: {}
+perf:
+  cpu_util_percent: 13.141666666666666
+  gpu_util_percent0: 0.09083333333333334
+  ram_util_percent: 16.599999999999994
+  vram_util_percent0: 0.36993652384531855
+pid: 9539
+policy_reward_max: {}
+policy_reward_mean: {}
+policy_reward_min: {}
+sampler_perf:
+  mean_env_wait_ms: 0.056902309323334434
+  mean_inference_ms: 0.6879859791788807
+  mean_processing_ms: 0.1520555158222774
+time_since_restore: 8.837768316268921
+time_this_iter_s: 8.837768316268921
+time_total_s: 8.837768316268921
+timestamp: 1571628474
+timesteps_since_restore: 4000
+timesteps_this_iter: 4000
+timesteps_total: 4000
+training_iteration: 1
+
+custom_metrics: {}
+date: 2019-10-20_20-28-01
+done: false
+episode_len_mean: 37.885714285714286
+episode_reward_max: 118.0
+episode_reward_mean: 37.885714285714286
+episode_reward_min: 10.0
+episodes_this_iter: 105
+episodes_total: 280
+experiment_id: c1985b2f9f6348e8a6a2ef0af4682809
+hostname: shitals-ll2x
+info:
+  grad_time_ms: 4036.278
+  learner:
+    default_policy:
+      cur_kl_coeff: 0.30000001192092896
+      cur_lr: 4.999999873689376e-05
+      entropy: 0.6192654371261597
+      entropy_coeff: 0.0
+      kl: 0.016124647110700607
+      policy_loss: -0.02555030956864357
+      total_loss: 234.61642456054688
+      vf_explained_var: 0.056420233100652695
+      vf_loss: 234.6371307373047
+  load_time_ms: 68.864
+  num_steps_sampled: 8000
+  num_steps_trained: 7936
+  sample_time_ms: 3627.557
+  update_time_ms: 397.128
+iterations_since_restore: 2
+node_ip: 10.0.0.147
+num_healthy_workers: 1
+off_policy_estimator: {}
+perf:
+  cpu_util_percent: 11.570000000000002
+  gpu_util_percent0: 0.158
+  ram_util_percent: 16.669999999999995
+  vram_util_percent0: 0.37082184916061134
+pid: 9539
+policy_reward_max: {}
+policy_reward_mean: {}
+policy_reward_min: {}
+sampler_perf:
+  mean_env_wait_ms: 0.05724200337041306
+  mean_inference_ms: 0.6779352287518473
+  mean_processing_ms: 0.1469726131016307
+time_since_restore: 16.3520724773407
+time_this_iter_s: 7.514304161071777
+time_total_s: 16.3520724773407
+timestamp: 1571628481
+timesteps_since_restore: 8000
+timesteps_this_iter: 4000
+timesteps_total: 8000
+training_iteration: 2
+
+custom_metrics: {}
+date: 2019-10-20_20-28-09
+done: false
+episode_len_mean: 58.43
+episode_reward_max: 200.0
+episode_reward_mean: 58.43
+episode_reward_min: 10.0
+episodes_this_iter: 53
+episodes_total: 333
+experiment_id: c1985b2f9f6348e8a6a2ef0af4682809
+hostname: shitals-ll2x
+info:
+  grad_time_ms: 3988.145
+  learner:
+    default_policy:
+      cur_kl_coeff: 0.30000001192092896
+      cur_lr: 4.999999873689376e-05
+      entropy: 0.5825954079627991
+      entropy_coeff: 0.0
+      kl: 0.011462260968983173
+      policy_loss: -0.018034115433692932
+      total_loss: 671.1863403320312
+      vf_explained_var: 0.04292021319270134
+      vf_loss: 671.2009887695312
+  load_time_ms: 47.208
+  num_steps_sampled: 12000
+  num_steps_trained: 11904
+  sample_time_ms: 3621.599
+  update_time_ms: 266.827
+iterations_since_restore: 3
+node_ip: 10.0.0.147
+num_healthy_workers: 1
+off_policy_estimator: {}
+perf:
+  cpu_util_percent: 14.344444444444443
+  gpu_util_percent0: 0.28444444444444444
+  ram_util_percent: 16.7
+  vram_util_percent0: 0.38130237478771684
+pid: 9539
+policy_reward_max: {}
+policy_reward_mean: {}
+policy_reward_min: {}
+sampler_perf:
+  mean_env_wait_ms: 0.057588927711937264
+  mean_inference_ms: 0.6790057427462614
+  mean_processing_ms: 0.14589451757677158
+time_since_restore: 23.87103033065796
+time_this_iter_s: 7.518957853317261
+time_total_s: 23.87103033065796
+timestamp: 1571628489
+timesteps_since_restore: 12000
+timesteps_this_iter: 4000
+timesteps_total: 12000
+training_iteration: 3
+
+custom_metrics: {}
+date: 2019-10-20_20-28-16
+done: false
+episode_len_mean: 88.6
+episode_reward_max: 200.0
+episode_reward_mean: 88.6
+episode_reward_min: 11.0
+episodes_this_iter: 28
+episodes_total: 361
+experiment_id: c1985b2f9f6348e8a6a2ef0af4682809
+hostname: shitals-ll2x
+info:
+  grad_time_ms: 3970.116
+  learner:
+    default_policy:
+      cur_kl_coeff: 0.30000001192092896
+      cur_lr: 4.999999873689376e-05
+      entropy: 0.5688203573226929
+      entropy_coeff: 0.0
+      kl: 0.007053664419800043
+      policy_loss: -0.009992220439016819
+      total_loss: 716.8200073242188
+      vf_explained_var: 0.08090715110301971
+      vf_loss: 716.827880859375
+  load_time_ms: 36.157
+  num_steps_sampled: 16000
+  num_steps_trained: 15872
+  sample_time_ms: 3599.739
+  update_time_ms: 201.738
+iterations_since_restore: 4
+node_ip: 10.0.0.147
+num_healthy_workers: 1
+off_policy_estimator: {}
+perf:
+  cpu_util_percent: 11.67
+  gpu_util_percent0: 0.202
+  ram_util_percent: 16.699999999999996
+  vram_util_percent0: 0.3813204710598847
+pid: 9539
+policy_reward_max: {}
+policy_reward_mean: {}
+policy_reward_min: {}
+sampler_perf:
+  mean_env_wait_ms: 0.057815542109882705
+  mean_inference_ms: 0.6789806997898117
+  mean_processing_ms: 0.14450644024927592
+time_since_restore: 31.337119817733765
+time_this_iter_s: 7.466089487075806
+time_total_s: 31.337119817733765
+timestamp: 1571628496
+timesteps_since_restore: 16000
+timesteps_this_iter: 4000
+timesteps_total: 16000
+training_iteration: 4
+
+custom_metrics: {}
+date: 2019-10-20_20-28-24
+done: false
+episode_len_mean: 114.93
+episode_reward_max: 200.0
+episode_reward_mean: 114.93
+episode_reward_min: 11.0
+episodes_this_iter: 25
+episodes_total: 386
+experiment_id: c1985b2f9f6348e8a6a2ef0af4682809
+hostname: shitals-ll2x
+info:
+  grad_time_ms: 3933.573
+  learner:
+    default_policy:
+      cur_kl_coeff: 0.30000001192092896
+      cur_lr: 4.999999873689376e-05
+      entropy: 0.5512559413909912
+      entropy_coeff: 0.0
+      kl: 0.009838772006332874
+      policy_loss: -0.008723822422325611
+      total_loss: 863.1475219726562
+      vf_explained_var: 0.11651255190372467
+      vf_loss: 863.1531982421875
+  load_time_ms: 29.555
+  num_steps_sampled: 20000
+  num_steps_trained: 19840
+  sample_time_ms: 3575.561
+  update_time_ms: 162.702
+iterations_since_restore: 5
+node_ip: 10.0.0.147
+num_healthy_workers: 1
+off_policy_estimator: {}
+perf:
+  cpu_util_percent: 10.97
+  gpu_util_percent0: 0.146
+  ram_util_percent: 16.669999999999998
+  vram_util_percent0: 0.3811576046103734
+pid: 9539
+policy_reward_max: {}
+policy_reward_mean: {}
+policy_reward_min: {}
+sampler_perf:
+  mean_env_wait_ms: 0.05792889153288109
+  mean_inference_ms: 0.6781774808220236
+  mean_processing_ms: 0.14280234198618938
+time_since_restore: 38.65394449234009
+time_this_iter_s: 7.316824674606323
+time_total_s: 38.65394449234009
+timestamp: 1571628504
+timesteps_since_restore: 20000
+timesteps_this_iter: 4000
+timesteps_total: 20000
+training_iteration: 5
+
+(base) ~/.../gymexp$ sudo apt install gdebi-core^C(base) ~/.../gymexp$ ^C
+(base) ~/.../gymexp$ 
