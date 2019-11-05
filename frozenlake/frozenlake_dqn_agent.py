@@ -15,8 +15,8 @@ config = DEFAULT_CONFIG.copy()
 config.update({
     "timesteps_per_iteration": 100,
     "target_network_update_freq": 500,
-    "buffer_size": 50000,
-    "lr": 5e-4,
+    "buffer_size": 5000,
+    "lr": 5e-3,
     "compress_observations": False,
     "learning_starts": 100,
     "num_workers": 1,
