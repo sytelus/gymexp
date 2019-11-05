@@ -35,6 +35,6 @@ class NegativeOnDeadWrapper(gym.Wrapper):
     
     def step(self, action):
         obs, reward, done, info = self.env.step(action)
-        if done and reward == 0.0:
-            reward = -1.0
+        if reward == 0.0:
+            reward = -1.0E3 if done else -1.0
         return obs, reward, done, info
