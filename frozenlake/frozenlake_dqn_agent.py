@@ -4,7 +4,7 @@ import numpy as np
 from ray.rllib.agents.dqn import DQNTrainer, DEFAULT_CONFIG
 from ray.tune.logger import pretty_print
 from ray.tune.registry import register_env
-import frozenlake.utils as fzutils
+import frozenlake_utils as fzutils
 
 
 fzutils.seed(42)

@@ -2,7 +2,7 @@ import time
 import random
 import numpy as np
 import gym
-import frozenlake.utils as fzutils
+import frozenlake_utils as fzutils
 
 fzutils.seed(42)
 env = fzutils.get_env(40)
