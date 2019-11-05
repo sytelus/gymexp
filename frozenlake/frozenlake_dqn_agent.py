@@ -12,28 +12,26 @@ fzutils.seed(42)
 ray.init(num_gpus=1)
 
 config = DEFAULT_CONFIG.copy()
-# config.update({
-#     "gamma": 0.99,
-#     "lr": 0.0001,
-#     "learning_starts": 10000,
-#     "buffer_size": 50000,
-#     "sample_batch_size": 4,
-#     "train_batch_size": 320,
-#     "schedule_max_timesteps": 2000000,
-#     "exploration_final_eps": 0.01,
-#     "exploration_fraction": 0.1,
-
-#     "model": {"dim":64}
-#     })
+config.update({
+    "timesteps_per_iteration": 100,
+    "target_network_update_freq": 50,
+    "buffer_size": 50000,
+    "lr": 5e-3,
+    "compress_observations": False,
+    "learning_starts": 100,
+    "num_workers": 1,
+    "num_gpus": 1,
+    "schedule_max_timesteps": 200000
+    })
 
 def env_creator(env_config):
-    env = fzutils.get_env(40, one_hot_obs=True)
+    env = fzutils.get_env(40)
     return env
 
 register_env("frozenworld_env", env_creator)
-agent = DQNTrainer(config=config, env="podworld_env")
+agent = DQNTrainer(config=config, env="frozenworld_env")
 
 for i in range(500):
     stats = agent.train()
-    # print(pretty_print(stats))
-    print ('episode_reward_mean', stats['episode_reward_min'])
+    print(pretty_print(stats))
+    print ('i, episode_reward_mean, episode_len_mean', i, stats['episode_reward_min'], stats['episode_len_mean'])
