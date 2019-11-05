@@ -22,8 +22,8 @@ config.update({
     "num_workers": 1,
     "num_gpus": 1,
     "noisy": False,
-    "exploration_fraction": 0.9,
-    "exploration_final_eps": 0.2,
+    "exploration_fraction": 0.1,
+    "exploration_final_eps": 0.01,
     "schedule_max_timesteps": 200000
     })
 
