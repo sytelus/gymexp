@@ -41,14 +41,16 @@ class NegativeOnDeadWrapper(gym.Wrapper):
             # lower values for done will cause suicide tendency for agent
             # without else part, agent might just oscillate forever
             if done:
-                reward = -1.0E4  
+                reward = -1.0E3  
             else:
                 col = obs % self.ncols
                 row = (obs - col) // self.nrows
                 dist = abs(self.ncols - col - 1) + abs(self.nrows -row -1)
-                dist_norm = float(dist) / (self.ncols + self.nrows) * 0.1
+                dist_norm = float(dist) / (self.ncols + self.nrows)
                 #print(obs, col, row, dist, dist_norm, self.ncols)
-                reward =  -dist_norm
+                reward =  math.exp(-dist_norm)
+        else:
+            reward = 1.0E3
 
                 
         return obs, reward, done, info

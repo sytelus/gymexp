@@ -1,8 +1,12 @@
 import gym
 import numpy as np
 import tensorflow as tf
+from gym.envs.toy_text.frozen_lake import generate_random_map
 
-env = gym.make('FrozenLake-v0')
+size = 40
+random_map = generate_random_map(size=size, p=0.88)
+env = gym.make("FrozenLake-v0", desc=random_map)
+
 
 #reward list, used to evaluate the agents performance
 rList = []
@@ -49,8 +53,8 @@ def train_network():
     tf.reset_default_graph()
 
     #configure single layer network
-    inputs1 = tf.placeholder(shape=[1, 16], dtype=tf.float32)
-    W1 = tf.Variable(tf.random_uniform([16, 4], 0, 0.01))
+    inputs1 = tf.placeholder(shape=[1, size*size], dtype=tf.float32)
+    W1 = tf.Variable(tf.random_uniform([size*size, 4], 0, 0.01))
 
     Qout = tf.matmul(inputs1, W1)
     predict = tf.argmax(Qout, 1)
@@ -81,7 +85,7 @@ def train_network():
                 moves += 1
 
                 # get the next predictions
-                [action, q_values] = session.run([predict, Qout], feed_dict={inputs1: np.identity(16)[state:state + 1]})
+                [action, q_values] = session.run([predict, Qout], feed_dict={inputs1: np.identity(size*size)[state:state + 1]})
 
                 # with probability epsilon perform a random action to explore the state space
                 action[0] = env.action_space.sample()
@@ -93,7 +97,7 @@ def train_network():
                 reward = shape_reward(reward, next_state, done)
 
                 # get the predicted q values
-                q_prime = session.run([Qout], feed_dict={inputs1: np.identity(16)[next_state:next_state + 1]})
+                q_prime = session.run([Qout], feed_dict={inputs1: np.identity(size*size)[next_state:next_state + 1]})
 
                 # bellmen update
                 maxQ = np.max(q_prime)
@@ -101,7 +105,7 @@ def train_network():
                                           gamma=gamma)
 
                 # train the network
-                session.run([updateModel], {inputs1: np.identity(16)[state:state + 1], nextQ: q_values})
+                session.run([updateModel], {inputs1: np.identity(size*size)[state:state + 1], nextQ: q_values})
 
                 state = next_state
 
@@ -112,12 +116,13 @@ def train_network():
         for i in range(num_episodes):
             state = env.reset()
             moves = 0
+            ep_reward = 0
 
             while moves < 99:
                 moves += 1
 
                 #get the next predictions
-                [action, q_values] = session.run([predict, Qout], feed_dict={inputs1: np.identity(16)[state:state + 1]})
+                [action, q_values] = session.run([predict, Qout], feed_dict={inputs1: np.identity(size*size)[state:state + 1]})
 
                 #with probability epsilon perform a random action to explore the state space
                 if np.random.rand(1) < epsilon:
@@ -128,14 +133,15 @@ def train_network():
 
                 #shape the reward
                 reward = shape_reward(reward, next_state, done)
+                ep_reward += reward
 
                 #bellmen update
-                q_prime = session.run([Qout], feed_dict={inputs1: np.identity(16)[next_state:next_state + 1]})
+                q_prime = session.run([Qout], feed_dict={inputs1: np.identity(size*size)[next_state:next_state + 1]})
                 maxQ = np.max(q_prime)
                 q_values = bellmen_update(reward=reward, maxQ=maxQ, q_values=q_values, done=done, action=action, gamma=gamma)
 
                 #train the network
-                session.run([updateModel], {inputs1:np.identity(16)[state:state+1],nextQ:q_values})
+                session.run([updateModel], {inputs1:np.identity(size*size)[state:state+1],nextQ:q_values})
 
                 state = next_state
 
@@ -143,6 +149,7 @@ def train_network():
                     # Reduce chance of random action as we train the model.
                     break
 
+            print(i, ep_reward, epsilon)
             epsilon = 1. / ((i / 50) + 10)
 
         for i in range(100):
@@ -155,7 +162,7 @@ def train_network():
             while not d:
                 j += 1
                 # Choose an action by greedily (with e chance of random action) from the Q-network
-                a, q = session.run([predict, Qout], feed_dict={inputs1: np.identity(16)[s:s + 1]})
+                a, q = session.run([predict, Qout], feed_dict={inputs1: np.identity(size*size)[s:s + 1]})
                 # print q
 
                 # Get new state and reward from environment
