@@ -2,7 +2,8 @@ import gym
 import ray
 import numpy as np
 #from ray.rllib.agents.dqn import DQNTrainer, DEFAULT_CONFIG
-from ray.rllib.agents.ppo import PPOTrainer, DEFAULT_CONFIG
+import ray.rllib.agents.ppo as ppo
+import ray.rllib.agents.dqn as dqn
 from ray.tune.logger import pretty_print
 from ray.tune.registry import register_env
 import frozenlake_utils as fzutils
@@ -13,6 +14,7 @@ parser.add_argument('--seed', action="store", type=int, default=42)
 parser.add_argument('--density', action="store", type=int, default=1)
 parser.add_argument('--size', action="store", type=int, default=40)
 parser.add_argument('--slippery', action="store", type=int, default=1)
+parser.add_argument('--algo', action="store", type=str, default='dqn')
 args = parser.parse_args()
 
 fzutils.seed(args.seed)
@@ -44,7 +46,9 @@ def env_creator(env_config):
     return env
 
 register_env("frozenworld_env", env_creator)
-agent = PPOTrainer(config=config, env="frozenworld_env")
+algos = {'ppo': ppo.PPOTrainer, 'dqn': dqn.DQNTrainer}
+algo =  algos[args.algo] 
+agent = algo(config=config, env="frozenworld_env")
 
 for i in range(50000):
     stats = agent.train()
