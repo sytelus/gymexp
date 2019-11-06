@@ -34,23 +34,33 @@ class NegativeOnDeadWrapper(gym.Wrapper):
     def __init__(self, env):
         super(NegativeOnDeadWrapper, self).__init__(env)
         self.ncols = self.nrows = int(math.sqrt(env.observation_space.n))
-    
+
+    def reset(self, **kwargs):
+        self.last_obs = self.env.reset(**kwargs) 
+        self.last_dist = self._get_dist(self.last_obs)
+        return self.last_obs   
+
+    def _get_dist(self, obs):
+        col = obs % self.ncols
+        row = (obs - col) // self.nrows
+        dist = abs(self.ncols - col - 1) + abs(self.nrows -row -1)
+        return dist
+
     def step(self, action):
         obs, reward, done, info = self.env.step(action)
+
+        dist = self._get_dist(self.last_obs)
         if reward == 0.0:
             # lower values for done will cause suicide tendency for agent
             # without else part, agent might just oscillate forever
             if done:
                 reward = -1.0E3  
             else:
-                col = obs % self.ncols
-                row = (obs - col) // self.nrows
-                dist = abs(self.ncols - col - 1) + abs(self.nrows -row -1)
-                dist_norm = float(dist) / (self.ncols + self.nrows)
-                #print(obs, col, row, dist, dist_norm, self.ncols)
-                reward =  math.exp(-dist_norm)
+                reward =  self.last_dist - dist
         else:
             reward = 1.0E3
 
-                
+        self.last_dist = dist
+        self.last_obs = obs  
+
         return obs, reward, done, info

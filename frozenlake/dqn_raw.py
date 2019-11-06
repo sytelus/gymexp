@@ -45,7 +45,7 @@ def bellmen_update(reward, gamma, maxQ, q_values, action, done):
 
 def train_network():
     # constants
-    num_episodes = 2000
+    num_episodes = 200000
     num_random_episodes = 500
     epsilon = 0.1
     gamma = 0.98  # parameter for the bellmen equation
