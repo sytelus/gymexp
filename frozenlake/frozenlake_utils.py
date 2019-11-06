@@ -8,7 +8,7 @@ def seed(s):
     np.random.seed(s)
     random.seed(s)
 
-def get_env(size, p=1.0/40, one_hot_obs=True, neg_dead_rew=True):
+def get_env(size, p=(1-1.0/40), one_hot_obs=True, neg_dead_rew=True):
     random_map = generate_random_map(size=size, p=p)
     env = gym.make("FrozenLake-v0", desc=random_map)
     if neg_dead_rew:
