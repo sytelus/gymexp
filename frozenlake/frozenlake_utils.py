@@ -8,9 +8,9 @@ def seed(s):
     np.random.seed(s)
     random.seed(s)
 
-def get_env(size, p=(1-1.0/40), one_hot_obs=True, neg_dead_rew=True):
+def get_env(size, p=(1-1.0/40), one_hot_obs=True, neg_dead_rew=True, is_slippery=True):
     random_map = generate_random_map(size=size, p=p)
-    env = gym.make("FrozenLake-v0", desc=random_map)
+    env = gym.make("FrozenLake-v0", desc=random_map, is_slippery=is_slippery)
     if neg_dead_rew:
         env = NegativeOnDeadWrapper(env)    
     if one_hot_obs:

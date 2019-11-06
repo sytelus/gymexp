@@ -11,7 +11,8 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument('--seed', action="store", type=int, default=42)
 parser.add_argument('--density', action="store", type=int, default=1)
-parser.add_argument('--dim', action="store", type=int, default=40)
+parser.add_argument('--size', action="store", type=int, default=40)
+parser.add_argument('--slippery', action="store", type=int, default=1)
 args = parser.parse_args()
 
 fzutils.seed(args.seed)
@@ -37,7 +38,9 @@ config = {
     }
 
 def env_creator(env_config):
-    env = fzutils.get_env(args.dim, p=(1.0 - float(args.density)/args.dim))
+    env = fzutils.get_env(size=args.size, 
+        p=(1.0 - float(args.density)/args.size),
+        is_slippery=args.slippery > 0)
     return env
 
 register_env("frozenworld_env", env_creator)
@@ -50,5 +53,5 @@ for i in range(50000):
     print ('i, episode_reward_mean, episode_len_mean', i, stats['episode_reward_mean'], stats['episode_len_mean'])
     if stats['episode_reward_min'] > 0.0:
         s = pretty_print(stats)
-        print(s, file=open('./result_ppo_{}.txt'.format(args.density), 'w'))
+        print(s, file=open('./result_{}_ppo_{}.txt'.format(args.slippery, args.density), 'w'))
         exit(0)
