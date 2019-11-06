@@ -49,16 +49,16 @@ class NegativeOnDeadWrapper(gym.Wrapper):
     def step(self, action):
         obs, reward, done, info = self.env.step(action)
 
-        dist = self._get_dist(self.last_obs)
+        dist = self._get_dist(obs)
         if reward == 0.0:
             # lower values for done will cause suicide tendency for agent
             # without else part, agent might just oscillate forever
             if done:
-                reward = -1.0E3  
+                reward = -1.0E1  
             else:
                 reward =  self.last_dist - dist
         else:
-            reward = 1.0E3
+            reward = 1.0E1
 
         self.last_dist = dist
         self.last_obs = obs  
