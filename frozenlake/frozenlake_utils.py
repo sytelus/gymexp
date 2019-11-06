@@ -48,7 +48,7 @@ class NegativeOnDeadWrapper(gym.Wrapper):
                 dist = abs(self.ncols - col - 1) + abs(self.nrows -row -1)
                 dist_norm = float(dist) / (self.ncols + self.nrows) * 0.1
                 #print(obs, col, row, dist, dist_norm, self.ncols)
-                reward =  dist_norm
+                reward =  -dist_norm
 
                 
         return obs, reward, done, info
