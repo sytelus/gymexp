@@ -57,5 +57,5 @@ for i in range(50000):
     print ('i, episode_reward_mean, episode_len_mean', i, stats['episode_reward_mean'], stats['episode_len_mean'])
     if stats['episode_reward_min'] > 0.0:
         s = pretty_print(stats)
-        print(s, file=open('./result_{}_ppo_{}.txt'.format(args.slippery, args.density), 'w'))
+        print(s, file=open('./result_{}_{}_{}.txt'.format(args.slippery, args.algo, args.density), 'w'))
         exit(0)
