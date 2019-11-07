@@ -1,50 +1,52 @@
 custom_metrics: {}
-date: 2019-11-06_21-25-07
+date: 2019-11-06_22-10-32
 done: false
-episode_len_mean: 71.53
-episode_reward_max: 45.0
-episode_reward_mean: 33.07
-episode_reward_min: 10.0
-episodes_this_iter: 57
-episodes_total: 3288
-experiment_id: a17036afe0ed4d398a8802b23bcec019
+episode_len_mean: 84.3
+episode_reward_max: 87.0
+episode_reward_mean: 46.59
+episode_reward_min: 2.0
+episodes_this_iter: 10
+episodes_total: 883
+experiment_id: 4434dfa9169548a3b50ab49a85744948
 hostname: l1-nv6
 info:
-  grad_time_ms: 4128.629
+  grad_time_ms: 7.915
   learner:
     default_policy:
-      cur_kl_coeff: 0.675000011920929
-      cur_lr: 4.999999873689376e-05
-      entropy: 0.8138911724090576
-      entropy_coeff: 0.0
-      kl: 0.01168833952397108
-      policy_loss: -0.0387076660990715
-      total_loss: 30.395057678222656
-      vf_explained_var: 0.7812283039093018
-      vf_loss: 30.425878524780273
-  load_time_ms: 22.894
-  num_steps_sampled: 68000
-  num_steps_trained: 67456
-  sample_time_ms: 3596.135
-  update_time_ms: 5.645
-iterations_since_restore: 17
+      cur_lr: 0.0005000000237487257
+      max_q: 53.78712844848633
+      mean_q: 41.7248649597168
+      mean_td_error: 1.5001657009124756
+      min_q: -8.561046600341797
+      model: {}
+  max_exploration: 0.020000000000000018
+  min_exploration: 0.020000000000000018
+  num_steps_sampled: 43000
+  num_steps_trained: 336000
+  num_target_updates: 85
+  opt_peak_throughput: 4042.861
+  opt_samples: 32.0
+  replay_time_ms: 4.363
+  sample_time_ms: 10.871
+  update_time_ms: 10.508
+iterations_since_restore: 43
 node_ip: 10.0.0.6
 num_healthy_workers: 1
 off_policy_estimator: {}
-pid: 50105
+pid: 58230
 policy_reward_max: {}
 policy_reward_mean: {}
 policy_reward_min: {}
 sampler_perf:
-  mean_env_wait_ms: 0.0785850898455915
-  mean_inference_ms: 0.6735665367257871
-  mean_processing_ms: 0.14451032668583882
-time_since_restore: 134.34362697601318
-time_this_iter_s: 7.7024102210998535
-time_total_s: 134.34362697601318
-timestamp: 1573075507
-timesteps_since_restore: 68000
-timesteps_this_iter: 4000
-timesteps_total: 68000
-training_iteration: 17
+  mean_env_wait_ms: 0.09198849856462488
+  mean_inference_ms: 0.6498678358801212
+  mean_processing_ms: 0.15662497040298423
+time_since_restore: 366.2713701725006
+time_this_iter_s: 8.409062147140503
+time_total_s: 366.2713701725006
+timestamp: 1573078232
+timesteps_since_restore: 43000
+timesteps_this_iter: 1000
+timesteps_total: 43000
+training_iteration: 43
 
