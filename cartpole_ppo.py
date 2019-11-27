@@ -3,18 +3,10 @@ import ray
 from ray.rllib.agents.ppo import PPOTrainer, DEFAULT_CONFIG
 from ray.tune.logger import pretty_print
 
-import tensorflow
-from tensorflow.python.client import device_lib
-print(device_lib.list_local_devices())
-
-from torch import cuda
-print(cuda.is_available())
-print(cuda.device_count())
-
-ray.init(num_gpus=2)
-print(ray.get_gpu_ids())
+ray.init(num_gpus=1)
 
 config = DEFAULT_CONFIG.copy()
+#config['num_gpus'] = 1
 config['num_workers'] = 1
 config['num_sgd_iter'] = 30
 config['sgd_minibatch_size'] = 128
